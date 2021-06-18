@@ -90,3 +90,30 @@ Below is a sequence of expressions. What is the result printed by the interprete
 (4 * 4) -> 16
 -> 16
 ```
+
+## Exercise 1.2:
+Translate the following expression into prefix form:
+```
+5 + 4 + (2 − (3 − (6 + 4/5)))
+____________________________
+      3(6 − 2)(2 − 7)
+```
+```
+;;;start with nested expressions
+(6 + 4/5) -> (+ 6 (/ 4 5))
+(3 − (6 + 4/5)) -> (- 3 (+ 6 (/ 4 5)))
+(2 − (3 − (6 + 4/5))) -> - (- 2 (- 3 (+ 6 (/ 4 5))))
+
+(/ (+ 5 4
+        (- 2
+           (- 3
+              (+ 6
+                 (/ 4 5)))))
+   (* 3
+      (- 6 2)
+      (- 2 7))
+)
+
+;;; answer
+(/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))) (* 3 (- 6 2) (- 2 7)))
+```
