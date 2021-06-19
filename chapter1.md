@@ -102,7 +102,7 @@ ____________________________
 ;;;start with nested expressions
 (6 + 4/5) -> (+ 6 (/ 4 5))
 (3 − (6 + 4/5)) -> (- 3 (+ 6 (/ 4 5)))
-(2 − (3 − (6 + 4/5))) -> - (- 2 (- 3 (+ 6 (/ 4 5))))
+(2 − (3 − (6 + 4/5))) -> (- 2 (- 3 (+ 6 (/ 4 5))))
 
 (/ (+ 5 4
         (- 2
@@ -116,4 +116,27 @@ ____________________________
 
 ;;; answer
 (/ (+ 5 4 (- 2 (- 3 (+ 6 (/ 4 5))))) (* 3 (- 6 2) (- 2 7)))
+```
+## Exercise 1.3:
+Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
+
+```
+;;; find larger of first two nums
+(define (max x y)
+    (if (> x y) x y))
+;;; find smaller of first two nums
+(define (min x y)
+    (if (< x y) x y))
+;;; after finding larger number of first two numbers
+;;; take the smaller one and compare against third num
+(define (second-large-num x y z)
+    (max z (min x y)))
+(define (square x)
+    (* x x))
+(define (sum-of-squares x y)
+    (+ (square x) (square y)))
+(define (sum-of-squares-of-largest-nums n1 n2 n3)
+    (sum-of-squares
+        (max n1 n2) ;returns larger num of first two num params
+        (second-large-num n1 n2 n3))) ;returns larger num of third param and smaller of first two params
 ```
