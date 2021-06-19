@@ -33,7 +33,7 @@ Below is a sequence of expressions. What is the result printed by the interprete
          (else -1))
    (+ a 1))
 ```
-## Exercise 1.1: My solutions
+### My solutions
 1. `10` -> 10
 2. `(+ 5 3 4)` -> 12
 3. `(- 9 1)` -> 8
@@ -98,6 +98,7 @@ Translate the following expression into prefix form:
 ____________________________
       3(6 − 2)(2 − 7)
 ```
+### My Solution
 ```
 ;;;start with nested expressions
 (6 + 4/5) -> (+ 6 (/ 4 5))
@@ -119,7 +120,7 @@ ____________________________
 ```
 ## Exercise 1.3:
 Define a procedure that takes three numbers as arguments and returns the sum of the squares of the two larger numbers.
-
+### My Solution
 ```
 ;;; find larger of first two nums
 (define (max x y)
@@ -140,3 +141,14 @@ Define a procedure that takes three numbers as arguments and returns the sum of 
         (max n1 n2) ;returns larger num of first two num params
         (second-large-num n1 n2 n3))) ;returns larger num of third param and smaller of first two params
 ```
+## Exercise 1.4:
+Observe that our model of evaluation allows for combinations whose operators are compound expressions. Use this observation to describe the behavior of the following procedure:
+```
+(define (a-plus-abs-b a b)
+  ((if (> b 0) + -) a b))
+```
+### My Solution
+`(if (> b 0) + -)` returns the operand for a primitive procedure to follow. When b is larger than 0, return `+`, otherwise, return `-`
+
+`((operand returned from conditional) a b)` based on what the conditional returns, the numbers will either be added to each other, or `b` will be subtracted from `a`, thus creating the primitive procedure.
+
