@@ -33,7 +33,7 @@ Below is a sequence of expressions. What is the result printed by the interprete
          (else -1))
    (+ a 1))
 ```
-### My solutions
+### My Solutions
 1. `10` -> 10
 2. `(+ 5 3 4)` -> 12
 3. `(- 9 1)` -> 8
@@ -152,3 +152,29 @@ Observe that our model of evaluation allows for combinations whose operators are
 
 `((operand returned from conditional) a b)` based on what the conditional returns, the numbers will either be added to each other, or `b` will be subtracted from `a`, thus creating the primitive procedure.
 
+## Exercise 1.5:
+Ben Bitdiddle has invented a test to determine whether the interpreter he is faced with is using applicative-order evaluation or normal-order evaluation. He defines the following two procedures:
+
+`(define (p) (p))`
+```
+(define (test x y)
+  (if (= x 0)
+      0
+      y))
+```
+Then he evaluates the expression
+
+`(test 0 (p))`
+
+What behavior will Ben observe with an interpreter that uses applicative-order evaluation? What behavior will he observe with an interpreter that uses normal-order evaluation? Explain your answer. (Assume that the evaluation rule for the special form if is the same whether the interpreter is using normal or applicative order: The predicate expression is evaluated first, and the result determines whether to evaluate the consequent or the alternative expression.)
+
+### My Solution
+I'll admit I had to look at the answer for this one to truly understand the interpreter evaluation order/behavior because my eyes glazed over a bit in the text when I first read it. This is in Section 1.1.5 The Substitution Model for Procedure Application: Applicative order versus normal order
+
+- What behavior will Ben observe with an interpreter that uses applicative-order evaluation?
+
+The first line that will be evaluated by the interpreter using applicative-order evaluation will be `(test 0 (p))`, and so it will look for the definition of `test` and its arguments. As it evaluates `test`, it will return the body of the procedure, but with `(p)`, it evaluates to a recursive call of itself and times out.
+
+- What behavior will he observe with an interpreter that uses normal-order evaluation?
+
+>If the interpreter uses normal-order evaluation, the (p) operand will not be evaluated until its value is needed. This is because when using normal-order evaluation the interpreter will substitute operand expressions for parameters. Since the conditional statement in the body is structured such that the second argument never needs to be evaluated, the entire test procedure will evaluate to 0 under normal-order evaluation." [Source](https://billthelizard.blogspot.com/2009/10/sicp-exercises-11-15.html)
